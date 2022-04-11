@@ -23,12 +23,5 @@ public class IndexController {
     return "index";
   }
 
-  @RequestMapping("test")
-  @ResponseBody
-  public String test() throws JSONException {
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("test","testdata");
-    return jsonObject.toString();
-  }
 
 }
