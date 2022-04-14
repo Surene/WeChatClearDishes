@@ -12,6 +12,11 @@ spring:
     view:
       suffix: .html
       prefix: /
+    hiddlemethod:
+      filter:
+        enabled: true #页面表单的rest功能 转化put和delete 接口方式用不上
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
