@@ -24,9 +24,9 @@ public class SubCategoryController {
         this.logger = LoggerFactory.getLogger(SubCategoryController.class);
     }
 
-    @GetMapping("/api/sub/vegetable/recommend")
-    ApiResponse getVegetableRecommendById(@RequestParam Integer id){
-        logger.info("/api/sub/vegetable/recommend get request");
+    @GetMapping("/api/sub/items")
+    ApiResponse getSub(@RequestParam Integer id){
+        logger.info("/api/sub/items get request");
 
         QueryWrapper<SubCategory> queryWrapper = new QueryWrapper<>();
 
