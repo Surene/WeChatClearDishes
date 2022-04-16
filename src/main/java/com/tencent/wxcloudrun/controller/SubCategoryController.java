@@ -30,7 +30,7 @@ public class SubCategoryController {
 
         QueryWrapper<SubCategory> queryWrapper = new QueryWrapper<>();
 
-        queryWrapper.select("*").eq("sub_cate_id",id);
+        queryWrapper.select("*").eq("cate_id",id);
 
         List<SubCategory> subCategories = subCategoryService.list(queryWrapper);
 
