@@ -1,11 +1,11 @@
 server:
-  port: 80
+  port: 8081
 
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://sh-cynosdbmysql-grp-28iw1p5m.sql.tencentcdb.com:22442/${MYSQL_DATABASE:springboot_demo}
+    url: jdbc:mysql://sh-cynosdbmysql-grp-28iw1p5m.sql.tencentcdb.com:22442/${MYSQL_DATABASE:WeChatClearDishs}
     username: root
     password: sunL001-5
   mvc:

@@ -6,12 +6,12 @@ import com.tencent.wxcloudrun.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/api/category")
 public class CategoryController {
 
     final CategoryService categoryService;
@@ -22,12 +22,11 @@ public class CategoryController {
         this.logger = LoggerFactory.getLogger(CategoryController.class);
     }
 
-    @GetMapping(value = "/api/category")
+    @GetMapping(value = "/get")
     ApiResponse get(){
         logger.info("/api/category get request");
 
         List<Category> categoryList = categoryService.list();
         return ApiResponse.ok(categoryList);
     }
-
 }
