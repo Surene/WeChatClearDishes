@@ -64,4 +64,53 @@ public class ClientController {
         return ApiResponse.ok(object);
     }
 
+//    @GetMapping("/tuan")
+//    ApiResponse changeTuan(@RequestParam String tuanId,String userId){
+//        logger.info("api/user/tuan GET request");
+//
+//        QueryWrapper<Client> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("user_id",userId);
+//        Client client = clientService.getOne(queryWrapper);
+//        client.setTuanId(tuanId);
+//        boolean b = clientService.saveOrUpdate(client);
+//        if (b){
+//            return ApiResponse.ok("修改团长成功");
+//        }else {
+//            return ApiResponse.error("修改团长失败");
+//        }
+//    }
+
+    @GetMapping("/balance")
+    ApiResponse getBalance(@RequestParam String userId){
+        QueryWrapper<Client> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        Client client = clientService.getOne(queryWrapper);
+        double banlance = client.getBanlance();
+        return ApiResponse.ok(banlance);
+    }
+
+    @GetMapping("/recharge")
+    ApiResponse rechargeBalance(@RequestParam String userId,double money){
+        QueryWrapper<Client> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        Client client = clientService.getOne(queryWrapper);
+        client.setBanlance(client.getBanlance() + money);
+        clientService.update(client,queryWrapper);
+        return ApiResponse.ok();
+    }
+
+    @GetMapping("/consume")
+    ApiResponse consumeBalance(@RequestParam String userId,double money){
+        QueryWrapper<Client> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        Client client = clientService.getOne(queryWrapper);
+        double balance = client.getBanlance() - money;
+        if(balance < 0){
+            return ApiResponse.error("支付失败,余额不足");
+        }
+        client.setBanlance(client.getBanlance() - money);
+        clientService.update(client,queryWrapper);
+        return ApiResponse.ok();
+    }
+
 }

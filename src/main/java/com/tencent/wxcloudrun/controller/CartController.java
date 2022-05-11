@@ -36,6 +36,7 @@ public class CartController {
 
     @PostMapping("/save")
     ApiResponse saveToCart(@RequestBody String goods){
+        System.out.println(goods);
         logger.info("api/cart/save get request");
         JSONObject jsonObject = JSONObject.parseObject(goods);
         String cartInfo = jsonObject.getString("goods");
@@ -109,6 +110,13 @@ public class CartController {
         }
 
         return ApiResponse.ok();
+    }
+
+    @GetMapping("/delete")
+    ApiResponse deleteCartItem(@RequestParam Integer goodsId){
+        boolean b = cartService.removeById(goodsId);
+        if (b) return ApiResponse.ok("删除成功");
+        else return ApiResponse.ok("删除失败");
     }
 
 
