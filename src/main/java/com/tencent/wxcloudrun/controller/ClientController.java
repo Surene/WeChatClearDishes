@@ -40,16 +40,12 @@ public class ClientController {
     }
 
     //@RequestBody 自动转json
-    @PostMapping("/login")
+    @GetMapping("/login")
     ApiResponse getLogin(@RequestBody String code){
-
-        JSONObject jsonObject = JSONObject.parseObject(code);
-        String string = jsonObject.getString("code");
-
 
         String appID = "wx7bcd4cb6702422a6";
         String appSecret = "9041999cf3e44beb901615527684347c";
-        String userCode = string;
+        String userCode = code;
 
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
         String replace = url.replace("APPID", appID).replace("SECRET", appSecret).replace("JSCODE", userCode);
