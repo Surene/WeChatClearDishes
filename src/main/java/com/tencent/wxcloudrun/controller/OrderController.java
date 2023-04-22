@@ -26,7 +26,7 @@ public class OrderController {
         this.orderService = orderService;
         this.logger = LoggerFactory.getLogger(OrderController.class);
     }
-
+    //新增订单
     @PostMapping("/add")
     ApiResponse createOrder(@RequestBody String order){
         logger.info("api/order/add get request");
@@ -38,7 +38,7 @@ public class OrderController {
         orderService.save(orderObject);
         return ApiResponse.ok();
     }
-
+    //获取订单
     @GetMapping("/get")
     ApiResponse getOrder(@RequestParam String orderId){
         System.out.println(orderId);
@@ -47,7 +47,7 @@ public class OrderController {
         Order order = orderService.getOne(queryWrapper);
         return ApiResponse.ok(order);
     }
-
+    //支付订单
     @GetMapping("/payed")
     ApiResponse payOrdered(@RequestParam String payTime,String orderId){
         Order order = orderService.getById(orderId);
@@ -56,7 +56,7 @@ public class OrderController {
         orderService.saveOrUpdate(order);
         return ApiResponse.ok();
     }
-
+    //取消订单
     @GetMapping("/cancel")
     ApiResponse cancelOrder(@RequestParam String orderId){
         Order order = orderService.getById(orderId);
@@ -64,11 +64,11 @@ public class OrderController {
         orderService.saveOrUpdate(order);
         return ApiResponse.ok();
     }
-
+    //获取订单列表
     @GetMapping("/getOrders")
     ApiResponse getOrderById(@RequestParam String userId){
         QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",userId);
+        queryWrapper.eq("user_id",userId).orderByDesc("create_time");
         List<Order> orderList = orderService.list(queryWrapper);
         return ApiResponse.ok(orderList);
     }

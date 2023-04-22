@@ -39,9 +39,9 @@ public class ClientController {
         return ApiResponse.ok(save);
     }
 
-    //@RequestBody 自动转json
     @GetMapping("/login")
-    ApiResponse getLogin(@RequestBody String code){
+    ApiResponse getLogin(@RequestParam String code){
+        System.out.println(code);
 
         String appID = "wx7bcd4cb6702422a6";
         String appSecret = "9041999cf3e44beb901615527684347c";
@@ -55,7 +55,7 @@ public class ClientController {
         RestTemplate restTemplate = new RestTemplate();
         String template = restTemplate.getForObject(replace, String.class);
         JSONObject object = JSONObject.parseObject(template);
-
+        System.out.println(object);
         //范围session 和openid
         return ApiResponse.ok(object);
     }

@@ -40,5 +40,21 @@ public class GoodsController {
         return ApiResponse.ok(goodsList);
     }
 
+    @GetMapping("/recommend")
+    ApiResponse getRecommend(){
+        int count = (int)goodsService.count();
+        // 随机数起始位置
+        int randomCount =(int) (Math.random()*count);
+        // 保证能展示10个数据
+        if (randomCount > count-10) {
+            randomCount = count-10;
+        }
+        QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("goods_id").last("limit "+String.valueOf(randomCount)+", 10");
+        List<Goods> list = goodsService.list(queryWrapper);
+
+        return ApiResponse.ok(list);
+    }
+
 
 }
